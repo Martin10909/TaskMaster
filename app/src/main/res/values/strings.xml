@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TaksMaster</string>
+    <string name="activity_main_tvNombreUsuario">Ingrese Nombre del Usuario</string>
+    <string name="activity_main_etIngreseNombre">Nombre Usuario</string>
+    <string name="activity_main_tvPass">Ingrese Contraseña</string>
+    <string name="activity_main_etPass">12345678</string>
+    <string name="activity_main_btnIngresar">Ingresar</string>
 </resources>
