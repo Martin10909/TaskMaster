@@ -5,55 +5,69 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/palette_dark_bg"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="366dp"
-        android:layout_height="463dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="32dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvNombreEmpresa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TaskMaster" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@android:drawable/ic_menu_today"
+            app:tint="@color/palette_cream_text"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="TaskMaster Logo"/>
 
         <TextView
-            android:id="@+id/tvNombreUsuario"
-            android:layout_width="match_parent"
+            android:id="@+id/tvNombreEmpresa"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/activity_main_tvNombreUsuario" />
+            android:text="TaskMaster"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@color/palette_cream_text"
+            android:layout_marginBottom="32dp"/>
 
         <EditText
             android:id="@+id/etIngreseNombre"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:ems="10"
-            android:hint="@string/activity_main_etIngreseNombre"
-            android:inputType="text" />
-
-        <TextView
-            android:id="@+id/tvPass"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_main_tvPass" />
+            android:hint="Usuario"
+            android:textColor="@color/palette_cream_text"
+            android:textColorHint="@color/palette_accent"
+            android:inputType="text"
+            android:padding="12dp"
+            android:backgroundTint="@color/palette_accent"
+            android:layout_marginBottom="16dp"/>
 
         <EditText
             android:id="@+id/etPass"
             android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:ems="10"
-            android:hint="@string/activity_main_etPass"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:textColor="@color/palette_cream_text"
+            android:textColorHint="@color/palette_accent"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:backgroundTint="@color/palette_accent"
+            android:layout_marginBottom="24dp"/>
 
         <Button
             android:id="@+id/btnIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_main_btnIngresar" />
+            android:text="Ingresar"
+            android:backgroundTint="@color/palette_primary"
+            android:textColor="@color/palette_cream_text"
+            android:padding="12dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

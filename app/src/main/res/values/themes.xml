@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.TaksMaster" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.TaksMaster" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/palette_primary</item>
+        <item name="colorPrimaryVariant">@color/palette_dark_bg</item>
+        <item name="colorOnPrimary">@color/palette_cream_text</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/palette_accent</item>
+        <item name="colorSecondaryVariant">@color/palette_accent</item>
+        <item name="colorOnSecondary">@color/palette_dark_bg</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/palette_dark_bg</item>
+        <!-- Background and Window -->
+        <item name="android:windowBackground">@color/palette_dark_bg</item>
     </style>
 
     <style name="Theme.TaksMaster" parent="Base.Theme.TaksMaster" />

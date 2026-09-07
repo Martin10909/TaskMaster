@@ -47,16 +47,28 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
 
     static class TareaViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombre, tvCategoria;
+        View viewPrioridadColor;
 
         public TareaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvItemNombre);
             tvCategoria = itemView.findViewById(R.id.tvItemCategoria);
+            viewPrioridadColor = itemView.findViewById(R.id.viewPrioridadColor);
         }
 
         public void bind(final Tarea tarea, final OnItemClickListener listener) {
             tvNombre.setText(tarea.getNombre());
             tvCategoria.setText(tarea.getCategoria());
+            
+            // Cambiar color según prioridad
+            int color = itemView.getContext().getResources().getColor(R.color.palette_primary);
+            if ("Alta".equals(tarea.getPrioridad())) {
+                color = itemView.getContext().getResources().getColor(R.color.cancel_red);
+            } else if ("Baja".equals(tarea.getPrioridad())) {
+                color = itemView.getContext().getResources().getColor(R.color.palette_accent);
+            }
+            viewPrioridadColor.setBackgroundColor(color);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

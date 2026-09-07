@@ -2,7 +2,6 @@ package com.example.taksmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -11,13 +10,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 public class VerTareaActivity extends AppCompatActivity {
 
     private TextView tvNombre, tvCategoria, tvPrioridad, tvEstado;
     private ProgressBar pbAvance;
     private RatingBar rbImportancia;
-    private CheckBox cbCompletada;
+    private SwitchCompat swEstado;
     private LinearLayout llSubtareasChecklist;
     private Button btnEditar, btnEliminar;
     private int posicion = -1;
@@ -34,7 +34,7 @@ public class VerTareaActivity extends AppCompatActivity {
         tvEstado = findViewById(R.id.tvDetalleEstado);
         pbAvance = findViewById(R.id.pbAvance);
         rbImportancia = findViewById(R.id.rbDetalleImportancia);
-        cbCompletada = findViewById(R.id.cbDetalleCompletada);
+        swEstado = findViewById(R.id.swEstado);
         llSubtareasChecklist = findViewById(R.id.llSubtareasChecklist);
         btnEditar = findViewById(R.id.btnEditar);
         btnEliminar = findViewById(R.id.btnEliminar);
@@ -43,17 +43,25 @@ public class VerTareaActivity extends AppCompatActivity {
 
         cargarDatos();
 
-        cbCompletada.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (tarea != null && (tarea.getSubTareas() == null || tarea.getSubTareas().isEmpty())) {
-                tarea.setCompletada(isChecked);
-                tarea.setProgreso(isChecked ? 100 : 0);
-                tvEstado.setText(isChecked ? "Completada" : "Pendiente");
-                pbAvance.setProgress(tarea.getProgreso());
-            } else if (isChecked) {
-                // Si tiene subtareas, forzar completado solo si el usuario lo marca manualmente?
-                // O mejor, el check principal solo funciona si no hay subtareas.
-                Toast.makeText(this, "Completa las subtareas para avanzar", Toast.LENGTH_SHORT).show();
-                cbCompletada.setChecked(tarea.isCompletada());
+        swEstado.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (tarea != null) {
+                if (tarea.getSubTareas() == null || tarea.getSubTareas().isEmpty()) {
+                    tarea.setCompletada(isChecked);
+                    tarea.setProgreso(isChecked ? 100 : 0);
+                    actualizarUIEstado(isChecked);
+                } else {
+                    // Si tiene subtareas, no permitir cambiarlo manualmente si no están todas listas
+                    int progreso = tarea.getProgreso();
+                    if (progreso < 100 && isChecked) {
+                        Toast.makeText(this, "Usa el checklist para completar la tarea", Toast.LENGTH_SHORT).show();
+                        swEstado.setChecked(false);
+                    } else if (progreso == 100 && !isChecked) {
+                        // Permitir desmarcarla
+                        tarea.setCompletada(false);
+                        tarea.setProgreso(0);
+                        actualizarUIEstado(false);
+                    }
+                }
             }
         });
 
@@ -72,6 +80,31 @@ public class VerTareaActivity extends AppCompatActivity {
         });
     }
 
+    private void actualizarUIEstado(boolean completada) {
+        tvEstado.setText(completada ? "Completada" : "Pendiente");
+        pbAvance.setProgress(tarea.getProgreso());
+        swEstado.setText(completada ? "Tarea Lista" : "Finalizar Tarea");
+        // Evitar disparar el listener al cambiar el estado programáticamente
+        swEstado.setOnCheckedChangeListener(null);
+        swEstado.setChecked(completada);
+        swEstado.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (tarea.getSubTareas() == null || tarea.getSubTareas().isEmpty()) {
+                tarea.setCompletada(isChecked);
+                tarea.setProgreso(isChecked ? 100 : 0);
+                actualizarUIEstado(isChecked);
+            } else {
+                if (isChecked && tarea.getProgreso() < 100) {
+                    Toast.makeText(this, "Usa el checklist para completar la tarea", Toast.LENGTH_SHORT).show();
+                    swEstado.setChecked(false);
+                } else if (!isChecked) {
+                    tarea.setCompletada(false);
+                    tarea.setProgreso(0);
+                    actualizarUIEstado(false);
+                }
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -86,15 +119,11 @@ public class VerTareaActivity extends AppCompatActivity {
             tvPrioridad.setText(tarea.getPrioridad());
             
             int progresoActual = tarea.getProgreso();
-            pbAvance.setProgress(progresoActual);
-            tvEstado.setText(progresoActual == 100 ? "Completada" : "Pendiente");
+            actualizarUIEstado(progresoActual == 100);
             rbImportancia.setRating(tarea.getImportancia());
             
-            cbCompletada.setOnCheckedChangeListener(null);
-            cbCompletada.setChecked(progresoActual == 100);
-            
-            // Si hay subtareas, deshabilitar el check principal (el progreso depende de las subtareas)
-            cbCompletada.setEnabled(tarea.getSubTareas().isEmpty());
+            // Si hay subtareas, el switch se bloquea para evitar cambios manuales que no coincidan con el progreso
+            swEstado.setEnabled(tarea.getSubTareas().isEmpty() || progresoActual == 100);
 
             generarChecklist();
         }
@@ -105,6 +134,7 @@ public class VerTareaActivity extends AppCompatActivity {
         if (tarea.getSubTareas() == null || tarea.getSubTareas().isEmpty()) {
             TextView tvVacio = new TextView(this);
             tvVacio.setText("Sin subtareas internas");
+            tvVacio.setTextColor(getResources().getColor(R.color.palette_accent));
             llSubtareasChecklist.addView(tvVacio);
             return;
         }
@@ -112,14 +142,14 @@ public class VerTareaActivity extends AppCompatActivity {
         for (SubTarea st : tarea.getSubTareas()) {
             CheckBox cb = new CheckBox(this);
             cb.setText(st.getNombre());
+            cb.setTextColor(getResources().getColor(R.color.palette_cream_text));
+            cb.setButtonTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.palette_accent)));
             cb.setChecked(st.isCompletada());
             cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 st.setCompletada(isChecked);
                 int nuevoProgreso = tarea.getProgreso();
-                pbAvance.setProgress(nuevoProgreso);
-                tvEstado.setText(nuevoProgreso == 100 ? "Completada" : "Pendiente");
-                cbCompletada.setChecked(nuevoProgreso == 100);
                 tarea.setCompletada(nuevoProgreso == 100);
+                actualizarUIEstado(nuevoProgreso == 100);
             });
             llSubtareasChecklist.addView(cb);
         }

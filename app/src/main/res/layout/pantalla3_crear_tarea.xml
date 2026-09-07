@@ -1,147 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/palette_dark_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nueva Tarea"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/palette_cream_text"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
 
         <ImageView
             android:id="@+id/ivIcono"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:src="@android:drawable/ic_menu_edit"
-            android:contentDescription="Icono de tarea" />
+            app:tint="@color/palette_accent"
+            android:contentDescription="Icono de tarea"
+            android:layout_marginBottom="24dp"/>
 
-        <TextView
+        <!-- Card 1: Datos Básicos -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre de la tarea"
-            android:layout_marginTop="16dp" />
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/palette_card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
-        <EditText
-            android:id="@+id/etNombre"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:hint="Ej. Terminar proyecto" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Categoría"
-            android:layout_marginTop="16dp" />
-
-        <Spinner
-            android:id="@+id/spCategoriaForm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Prioridad"
-            android:layout_marginTop="16dp" />
-
-        <RadioGroup
-            android:id="@+id/rgPrioridad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rbAlta"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Alta" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <RadioButton
-                android:id="@+id/rbMedia"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre"
+                    android:textStyle="bold"
+                    android:textColor="@color/palette_accent" />
+
+                <EditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ej. Terminar proyecto"
+                    android:textColor="@color/palette_cream_text"
+                    android:textColorHint="@color/palette_accent"
+                    android:backgroundTint="@color/palette_accent"
+                    android:padding="10dp"
+                    android:layout_marginTop="4dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Categoría"
+                    android:textStyle="bold"
+                    android:textColor="@color/palette_accent"
+                    android:layout_marginTop="12dp" />
+
+                <Spinner
+                    android:id="@+id/spCategoriaForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp"
+                    android:backgroundTint="@color/palette_cream_text" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 2: Prioridad e Importancia -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/palette_card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Media" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <RadioButton
-                android:id="@+id/rbBaja"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prioridad"
+                    android:textStyle="bold"
+                    android:textColor="@color/palette_accent" />
+
+                <RadioGroup
+                    android:id="@+id/rgPrioridad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <RadioButton
+                        android:id="@+id/rbAlta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alta"
+                        android:textColor="@color/palette_cream_text"
+                        android:buttonTint="@color/palette_accent"/>
+
+                    <RadioButton
+                        android:id="@+id/rbMedia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Media"
+                        android:textColor="@color/palette_cream_text"
+                        android:buttonTint="@color/palette_accent"/>
+
+                    <RadioButton
+                        android:id="@+id/rbBaja"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Baja"
+                        android:textColor="@color/palette_cream_text"
+                        android:buttonTint="@color/palette_accent"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Importancia"
+                    android:textStyle="bold"
+                    android:textColor="@color/palette_accent"
+                    android:layout_marginTop="12dp" />
+
+                <RatingBar
+                    android:id="@+id/rbImportancia"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1.0"
+                    android:isIndicator="false"
+                    android:progressTint="@color/palette_accent"
+                    android:layout_marginTop="4dp" />
+
+                <CheckBox
+                    android:id="@+id/cbCompletada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Completada"
+                    android:textColor="@color/palette_cream_text"
+                    android:layout_marginTop="12dp"
+                    android:buttonTint="@color/palette_accent"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card 3: Subtareas -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="@color/palette_card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Baja" />
-        </RadioGroup>
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <CheckBox
-            android:id="@+id/cbCompletada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Marcar como completada"
-            android:layout_marginTop="16dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Subtareas"
+                    android:textStyle="bold"
+                    android:textColor="@color/palette_accent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Importancia"
-            android:layout_marginTop="16dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
 
-        <RatingBar
-            android:id="@+id/rbImportancia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:stepSize="1.0" />
+                    <EditText
+                        android:id="@+id/etNuevaSubtarea"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Nombre de subtarea"
+                        android:textColor="@color/palette_cream_text"
+                        android:textColorHint="@color/palette_accent"
+                        android:backgroundTint="@color/palette_accent"
+                        android:padding="10dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Subtareas (Listado interno)"
-            android:layout_marginTop="16dp"
-            android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/btnAgregarSubtarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:textColor="@color/palette_cream_text"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@color/palette_accent"/>
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etNuevaSubtarea"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Nombre de subtarea" />
-
-            <Button
-                android:id="@+id/btnAgregarSubtarea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Añadir" />
-        </LinearLayout>
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cgSubtareas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cgSubtareas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:chipSpacing="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="24dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingBottom="24dp">
 
             <Button
                 android:id="@+id/btnGuardar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Guardar"
+                android:backgroundTint="@color/palette_primary"
+                android:textColor="@color/palette_cream_text"
                 android:layout_marginEnd="8dp" />
 
             <Button
                 android:id="@+id/btnCancelar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Cancelar" />
+                android:layout_weight="1"
+                android:text="Cancelar"
+                android:backgroundTint="@color/cancel_red"
+                android:textColor="@color/palette_cream_text" />
         </LinearLayout>
 
     </LinearLayout>

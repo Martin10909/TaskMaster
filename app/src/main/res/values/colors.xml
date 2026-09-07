@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Deep Blue Palette -->
+    <color name="palette_dark_bg">#111831</color>
+    <color name="palette_card_bg">#1C2541</color>
+    <color name="palette_primary">#46539E</color>
+    <color name="palette_accent">#758EB7</color>
+    <color name="palette_cream_text">#EAE3D2</color>
+    <color name="cancel_red">#8E1616</color>
 </resources>
