@@ -1,8 +1,73 @@
 <resources>
     <string name="app_name">TaksMaster</string>
+
+    <!-- MainActivity -->
+    <string name="login_title">TaskMaster</string>
+    <string name="login_user_hint">Usuario</string>
+    <string name="login_pass_hint">Contraseña</string>
+    <string name="login_btn_ingresar">Ingresar</string>
     <string name="activity_main_tvNombreUsuario">Ingrese Nombre del Usuario</string>
     <string name="activity_main_etIngreseNombre">Nombre Usuario</string>
     <string name="activity_main_tvPass">Ingrese Contraseña</string>
     <string name="activity_main_etPass">12345678</string>
     <string name="activity_main_btnIngresar">Ingresar</string>
+
+    <!-- GestionTareasActivity (Pantalla 2) -->
+    <string name="lista_titulo">Mis tareas</string>
+    <string name="lista_pendientes">Tareas pendientes: %1$d</string>
+    <string name="lista_btn_nueva">+ Nueva tarea</string>
+    <string name="cat_todas">Todas</string>
+    <string name="cat_trabajo">Trabajo</string>
+    <string name="cat_personal">Personal</string>
+    <string name="cat_estudio">Estudio</string>
+
+    <!-- CrearTareaActivity (Pantalla 3) -->
+    <string name="form_titulo_nueva">Nueva Tarea</string>
+    <string name="form_nombre_label">Nombre</string>
+    <string name="form_nombre_hint">Ej. Terminar proyecto</string>
+    <string name="form_categoria_label">Categoría</string>
+    <string name="form_prioridad_label">Prioridad</string>
+    <string name="prioridad_alta">Alta</string>
+    <string name="prioridad_media">Media</string>
+    <string name="prioridad_baja">Baja</string>
+    <string name="form_importancia_label">Importancia</string>
+    <string name="form_completada_label">Completada</string>
+    <string name="form_subtareas_label">Subtareas</string>
+    <string name="form_subtarea_hint">Nombre de subtarea</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="toast_nombre_vacio">Por favor, ingrese un nombre</string>
+    <string name="toast_tarea_guardada">Tarea guardada</string>
+
+    <!-- VerTareaActivity (Pantalla 4) -->
+    <string name="detalle_info_label">Información General</string>
+    <string name="detalle_nombre_col">Nombre:</string>
+    <string name="detalle_categoria_col">Categoría:</string>
+    <string name="detalle_prioridad_col">Prioridad:</string>
+    <string name="detalle_estado_col">Estado:</string>
+    <string name="detalle_cumplimiento_label">Cumplimiento</string>
+    <string name="detalle_importancia_col">Importancia: </string>
+    <string name="detalle_sw_finalizar">Finalizar Tarea</string>
+    <string name="detalle_sw_lista">Tarea Lista</string>
+    <string name="detalle_subtareas_label">Tareas Internas</string>
+    <string name="detalle_subtareas_vacio">Sin subtareas internas</string>
+    <string name="btn_editar">Editar</string>
+    <string name="btn_eliminar">Eliminar</string>
+    <string name="estado_completada">Completada</string>
+    <string name="estado_pendiente">Pendiente</string>
+    <string name="toast_tarea_eliminada">Tarea eliminada</string>
+    <string name="toast_subtareas_pendientes">Usa el checklist para completar la tarea</string>
+
+    <string-array name="categorias_filtro">
+        <item>@string/cat_todas</item>
+        <item>@string/cat_trabajo</item>
+        <item>@string/cat_personal</item>
+        <item>@string/cat_estudio</item>
+    </string-array>
+
+    <string-array name="categorias_form">
+        <item>@string/cat_trabajo</item>
+        <item>@string/cat_personal</item>
+        <item>@string/cat_estudio</item>
+    </string-array>
 </resources>

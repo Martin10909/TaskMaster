@@ -19,7 +19,7 @@
         android:id="@+id/tvTituloLista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mis tareas"
+        android:text="@string/lista_titulo"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/palette_cream_text"
@@ -49,9 +49,9 @@
                 android:id="@+id/tvTareasPendientes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tareas pendientes: 0"
                 android:textStyle="bold"
-                android:textColor="@color/palette_cream_text" />
+                android:textColor="@color/palette_cream_text"
+                tools:text="Tareas pendientes: 5" />
 
             <ProgressBar
                 android:id="@+id/pbGlobal"
@@ -92,7 +92,7 @@
         android:id="@+id/btnNuevaTarea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+ Nueva tarea"
+        android:text="@string/lista_btn_nueva"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/palette_primary"
         android:textColor="@color/palette_cream_text"

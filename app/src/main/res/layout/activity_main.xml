@@ -25,13 +25,13 @@
             android:src="@android:drawable/ic_menu_today"
             app:tint="@color/palette_cream_text"
             android:layout_marginBottom="16dp"
-            android:contentDescription="TaskMaster Logo"/>
+            android:contentDescription="@string/login_title"/>
 
         <TextView
             android:id="@+id/tvNombreEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TaskMaster"
+            android:text="@string/login_title"
             android:textSize="36sp"
             android:textStyle="bold"
             android:textColor="@color/palette_cream_text"
@@ -41,31 +41,33 @@
             android:id="@+id/etIngreseNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Usuario"
+            android:hint="@string/login_user_hint"
             android:textColor="@color/palette_cream_text"
             android:textColorHint="@color/palette_accent"
             android:inputType="text"
             android:padding="12dp"
             android:backgroundTint="@color/palette_accent"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/etPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/login_pass_hint"
             android:textColor="@color/palette_cream_text"
             android:textColorHint="@color/palette_accent"
             android:inputType="textPassword"
             android:padding="12dp"
             android:backgroundTint="@color/palette_accent"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/btnIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingresar"
+            android:text="@string/login_btn_ingresar"
             android:backgroundTint="@color/palette_primary"
             android:textColor="@color/palette_cream_text"
             android:padding="12dp"/>

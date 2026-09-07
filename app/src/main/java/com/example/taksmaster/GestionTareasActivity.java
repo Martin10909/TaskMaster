@@ -59,15 +59,16 @@ public class GestionTareasActivity extends AppCompatActivity {
         rvTareas.setAdapter(adapter);
 
         // Spinner setup
-        String[] categorias = {"Todas", "Trabajo", "Personal", "Estudio"};
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.categorias_filtro, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategoria.setAdapter(spinnerAdapter);
 
         spCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filtrarTareas(categorias[position]);
+                String[] categoriasValores = getResources().getStringArray(R.array.categorias_filtro);
+                filtrarTareas(categoriasValores[position]);
             }
 
             @Override
@@ -90,7 +91,7 @@ public class GestionTareasActivity extends AppCompatActivity {
 
     private void filtrarTareas(String categoria) {
         List<Tarea> filtradas = new ArrayList<>();
-        if (categoria.equals("Todas")) {
+        if (categoria.equals(getString(R.string.cat_todas))) {
             filtradas.addAll(todasLasTareas);
         } else {
             for (Tarea t : todasLasTareas) {
@@ -111,6 +112,6 @@ public class GestionTareasActivity extends AppCompatActivity {
         
         int progreso = total > 0 ? (completadas * 100 / total) : 0;
         pbGlobal.setProgress(progreso);
-        tvTareasPendientes.setText("Tareas pendientes: " + (total - completadas));
+        tvTareasPendientes.setText(getString(R.string.lista_pendientes, (total - completadas)));
     }
 }

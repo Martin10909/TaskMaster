@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/palette_dark_bg">
@@ -14,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nueva Tarea"
+            android:text="@string/form_titulo_nueva"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/palette_cream_text"
@@ -28,7 +29,7 @@
             android:layout_gravity="center"
             android:src="@android:drawable/ic_menu_edit"
             app:tint="@color/palette_accent"
-            android:contentDescription="Icono de tarea"
+            android:contentDescription="@string/form_titulo_nueva"
             android:layout_marginBottom="24dp"/>
 
         <!-- Card 1: Datos Básicos -->
@@ -49,7 +50,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nombre"
+                    android:text="@string/form_nombre_label"
                     android:textStyle="bold"
                     android:textColor="@color/palette_accent" />
 
@@ -57,17 +58,18 @@
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ej. Terminar proyecto"
+                    android:hint="@string/form_nombre_hint"
                     android:textColor="@color/palette_cream_text"
                     android:textColorHint="@color/palette_accent"
                     android:backgroundTint="@color/palette_accent"
-                    android:padding="10dp"
-                    android:layout_marginTop="4dp"/>
+                    android:padding="8dp"
+                    android:layout_marginTop="4dp"
+                    android:importantForAutofill="no" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Categoría"
+                    android:text="@string/form_categoria_label"
                     android:textStyle="bold"
                     android:textColor="@color/palette_accent"
                     android:layout_marginTop="12dp" />
@@ -100,7 +102,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Prioridad"
+                    android:text="@string/form_prioridad_label"
                     android:textStyle="bold"
                     android:textColor="@color/palette_accent" />
 
@@ -115,7 +117,7 @@
                         android:id="@+id/rbAlta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Alta"
+                        android:text="@string/prioridad_alta"
                         android:textColor="@color/palette_cream_text"
                         android:buttonTint="@color/palette_accent"/>
 
@@ -123,7 +125,7 @@
                         android:id="@+id/rbMedia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Media"
+                        android:text="@string/prioridad_media"
                         android:textColor="@color/palette_cream_text"
                         android:buttonTint="@color/palette_accent"/>
 
@@ -131,7 +133,7 @@
                         android:id="@+id/rbBaja"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Baja"
+                        android:text="@string/prioridad_baja"
                         android:textColor="@color/palette_cream_text"
                         android:buttonTint="@color/palette_accent"/>
                 </RadioGroup>
@@ -139,7 +141,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Importancia"
+                    android:text="@string/form_importancia_label"
                     android:textStyle="bold"
                     android:textColor="@color/palette_accent"
                     android:layout_marginTop="12dp" />
@@ -152,17 +154,8 @@
                     android:numStars="5"
                     android:stepSize="1.0"
                     android:isIndicator="false"
-                    android:progressTint="@color/palette_accent"
+                    android:progressTint="@color/star_yellow"
                     android:layout_marginTop="4dp" />
-
-                <CheckBox
-                    android:id="@+id/cbCompletada"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Completada"
-                    android:textColor="@color/palette_cream_text"
-                    android:layout_marginTop="12dp"
-                    android:buttonTint="@color/palette_accent"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -184,7 +177,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Subtareas"
+                    android:text="@string/form_subtareas_label"
                     android:textStyle="bold"
                     android:textColor="@color/palette_accent" />
 
@@ -199,20 +192,22 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Nombre de subtarea"
+                        android:hint="@string/form_subtarea_hint"
                         android:textColor="@color/palette_cream_text"
                         android:textColorHint="@color/palette_accent"
                         android:backgroundTint="@color/palette_accent"
-                        android:padding="10dp"/>
+                        android:padding="8dp"
+                        android:importantForAutofill="no" />
 
                     <Button
                         android:id="@+id/btnAgregarSubtarea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+"
+                        android:text="@string/lista_btn_nueva"
                         android:textColor="@color/palette_cream_text"
                         android:layout_marginStart="8dp"
-                        android:backgroundTint="@color/palette_accent"/>
+                        android:backgroundTint="@color/palette_accent"
+                        tools:text="+" />
                 </LinearLayout>
 
                 <com.google.android.material.chip.ChipGroup
@@ -236,7 +231,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Guardar"
+                android:text="@string/btn_guardar"
                 android:backgroundTint="@color/palette_primary"
                 android:textColor="@color/palette_cream_text"
                 android:layout_marginEnd="8dp" />
@@ -246,7 +241,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cancelar"
+                android:text="@string/btn_cancelar"
                 android:backgroundTint="@color/cancel_red"
                 android:textColor="@color/palette_cream_text" />
         </LinearLayout>

@@ -53,7 +53,7 @@ public class VerTareaActivity extends AppCompatActivity {
                     // Si tiene subtareas, no permitir cambiarlo manualmente si no están todas listas
                     int progreso = tarea.getProgreso();
                     if (progreso < 100 && isChecked) {
-                        Toast.makeText(this, "Usa el checklist para completar la tarea", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.toast_subtareas_pendientes), Toast.LENGTH_SHORT).show();
                         swEstado.setChecked(false);
                     } else if (progreso == 100 && !isChecked) {
                         // Permitir desmarcarla
@@ -74,16 +74,16 @@ public class VerTareaActivity extends AppCompatActivity {
         btnEliminar.setOnClickListener(v -> {
             if (posicion != -1) {
                 GestionTareasActivity.todasLasTareas.remove(posicion);
-                Toast.makeText(this, "Tarea eliminada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.toast_tarea_eliminada), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
     }
 
     private void actualizarUIEstado(boolean completada) {
-        tvEstado.setText(completada ? "Completada" : "Pendiente");
+        tvEstado.setText(getString(completada ? R.string.estado_completada : R.string.estado_pendiente));
         pbAvance.setProgress(tarea.getProgreso());
-        swEstado.setText(completada ? "Tarea Lista" : "Finalizar Tarea");
+        swEstado.setText(getString(completada ? R.string.detalle_sw_lista : R.string.detalle_sw_finalizar));
         // Evitar disparar el listener al cambiar el estado programáticamente
         swEstado.setOnCheckedChangeListener(null);
         swEstado.setChecked(completada);
@@ -94,7 +94,7 @@ public class VerTareaActivity extends AppCompatActivity {
                 actualizarUIEstado(isChecked);
             } else {
                 if (isChecked && tarea.getProgreso() < 100) {
-                    Toast.makeText(this, "Usa el checklist para completar la tarea", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.toast_subtareas_pendientes), Toast.LENGTH_SHORT).show();
                     swEstado.setChecked(false);
                 } else if (!isChecked) {
                     tarea.setCompletada(false);
@@ -133,7 +133,7 @@ public class VerTareaActivity extends AppCompatActivity {
         llSubtareasChecklist.removeAllViews();
         if (tarea.getSubTareas() == null || tarea.getSubTareas().isEmpty()) {
             TextView tvVacio = new TextView(this);
-            tvVacio.setText("Sin subtareas internas");
+            tvVacio.setText(getString(R.string.detalle_subtareas_vacio));
             tvVacio.setTextColor(getResources().getColor(R.color.palette_accent));
             llSubtareasChecklist.addView(tvVacio);
             return;

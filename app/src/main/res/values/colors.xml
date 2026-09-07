@@ -10,4 +10,5 @@
     <color name="palette_accent">#758EB7</color>
     <color name="palette_cream_text">#EAE3D2</color>
     <color name="cancel_red">#8E1616</color>
+    <color name="star_yellow">#FFD700</color>
 </resources>
