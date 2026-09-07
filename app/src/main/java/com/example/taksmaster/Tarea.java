@@ -1,6 +1,8 @@
 package com.example.taksmaster;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tarea implements Serializable {
     private String nombre;
@@ -9,6 +11,7 @@ public class Tarea implements Serializable {
     private boolean completada;
     private float importancia;
     private int progreso;
+    private List<SubTarea> subTareas;
 
     public Tarea(String nombre, String categoria, String prioridad, boolean completada, float importancia, int progreso) {
         this.nombre = nombre;
@@ -17,6 +20,7 @@ public class Tarea implements Serializable {
         this.completada = completada;
         this.importancia = importancia;
         this.progreso = progreso;
+        this.subTareas = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -60,10 +64,25 @@ public class Tarea implements Serializable {
     }
 
     public int getProgreso() {
+        if (subTareas != null && !subTareas.isEmpty()) {
+            int completadas = 0;
+            for (SubTarea st : subTareas) {
+                if (st.isCompletada()) completadas++;
+            }
+            return (completadas * 100) / subTareas.size();
+        }
         return progreso;
     }
 
     public void setProgreso(int progreso) {
         this.progreso = progreso;
+    }
+
+    public List<SubTarea> getSubTareas() {
+        return subTareas;
+    }
+
+    public void setSubTareas(List<SubTarea> subTareas) {
+        this.subTareas = subTareas;
     }
 }

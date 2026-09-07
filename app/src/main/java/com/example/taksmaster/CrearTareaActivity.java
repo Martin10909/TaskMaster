@@ -11,16 +11,22 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrearTareaActivity extends AppCompatActivity {
 
     private ImageView ivIcono;
-    private EditText etNombre;
+    private EditText etNombre, etNuevaSubtarea;
     private Spinner spCategoriaForm;
     private RadioGroup rgPrioridad;
     private CheckBox cbCompletada;
     private RatingBar rbImportancia;
-    private Button btnGuardar, btnCancelar;
+    private Button btnGuardar, btnCancelar, btnAgregarSubtarea;
+    private ChipGroup cgSubtareas;
+    private List<SubTarea> subTareasTemporales = new ArrayList<>();
     private int posicionEdicion = -1;
 
     @Override
@@ -30,19 +36,21 @@ public class CrearTareaActivity extends AppCompatActivity {
 
         ivIcono = findViewById(R.id.ivIcono);
         etNombre = findViewById(R.id.etNombre);
+        etNuevaSubtarea = findViewById(R.id.etNuevaSubtarea);
         spCategoriaForm = findViewById(R.id.spCategoriaForm);
         rgPrioridad = findViewById(R.id.rgPrioridad);
         cbCompletada = findViewById(R.id.cbCompletada);
         rbImportancia = findViewById(R.id.rbImportancia);
         btnGuardar = findViewById(R.id.btnGuardar);
         btnCancelar = findViewById(R.id.btnCancelar);
+        btnAgregarSubtarea = findViewById(R.id.btnAgregarSubtarea);
+        cgSubtareas = findViewById(R.id.cgSubtareas);
 
         String[] categorias = {"Trabajo", "Personal", "Estudio"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategoriaForm.setAdapter(adapter);
 
-        // Pre-cargar datos si es edición
         posicionEdicion = getIntent().getIntExtra("posicion", -1);
         if (posicionEdicion != -1) {
             Tarea tareaEdicion = GestionTareasActivity.todasLasTareas.get(posicionEdicion);
@@ -58,10 +66,18 @@ public class CrearTareaActivity extends AppCompatActivity {
             if ("Alta".equals(tareaEdicion.getPrioridad())) rgPrioridad.check(R.id.rbAlta);
             else if ("Media".equals(tareaEdicion.getPrioridad())) rgPrioridad.check(R.id.rbMedia);
             else if ("Baja".equals(tareaEdicion.getPrioridad())) rgPrioridad.check(R.id.rbBaja);
+
+            subTareasTemporales.addAll(tareaEdicion.getSubTareas());
+            actualizarChips();
         }
 
-        ivIcono.setOnClickListener(v -> {
-            Toast.makeText(this, "Seleccionar ícono (Funcionalidad futura)", Toast.LENGTH_SHORT).show();
+        btnAgregarSubtarea.setOnClickListener(v -> {
+            String nombreST = etNuevaSubtarea.getText().toString().trim();
+            if (!nombreST.isEmpty()) {
+                subTareasTemporales.add(new SubTarea(nombreST));
+                etNuevaSubtarea.setText("");
+                actualizarChips();
+            }
         });
 
         btnGuardar.setOnClickListener(v -> {
@@ -81,18 +97,18 @@ public class CrearTareaActivity extends AppCompatActivity {
             }
 
             if (posicionEdicion != -1) {
-                // Actualizar
                 Tarea t = GestionTareasActivity.todasLasTareas.get(posicionEdicion);
                 t.setNombre(nombre);
                 t.setCategoria(categoria);
                 t.setPrioridad(prioridad);
                 t.setCompletada(completada);
                 t.setImportancia(importancia);
-                if (completada) t.setProgreso(100);
+                t.setSubTareas(new ArrayList<>(subTareasTemporales));
+                if (completada && t.getSubTareas().isEmpty()) t.setProgreso(100);
             } else {
-                // Crear nueva
-                int progreso = completada ? 100 : 0;
+                int progreso = (completada && subTareasTemporales.isEmpty()) ? 100 : 0;
                 Tarea nueva = new Tarea(nombre, categoria, prioridad, completada, importancia, progreso);
+                nueva.setSubTareas(new ArrayList<>(subTareasTemporales));
                 GestionTareasActivity.todasLasTareas.add(nueva);
             }
 
@@ -101,5 +117,19 @@ public class CrearTareaActivity extends AppCompatActivity {
         });
 
         btnCancelar.setOnClickListener(v -> finish());
+    }
+
+    private void actualizarChips() {
+        cgSubtareas.removeAllViews();
+        for (SubTarea st : subTareasTemporales) {
+            Chip chip = new Chip(this);
+            chip.setText(st.getNombre());
+            chip.setCloseIconVisible(true);
+            chip.setOnCloseIconClickListener(v -> {
+                subTareasTemporales.remove(st);
+                actualizarChips();
+            });
+            cgSubtareas.addView(chip);
+        }
     }
 }

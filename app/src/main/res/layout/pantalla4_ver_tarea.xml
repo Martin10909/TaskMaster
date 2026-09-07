@@ -1,118 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/ivIconoDetalle"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@android:drawable/ic_menu_info_details"
-        android:contentDescription="Detalle de tarea" />
-
-    <RatingBar
-        android:id="@+id/rbDetalleImportancia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="1.0"
-        android:isIndicator="true"
-        android:layout_marginTop="8dp" />
-
-    <TableLayout
-        android:id="@+id/tlDetalle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:stretchColumns="1">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre:"
-                android:textStyle="bold"
-                android:padding="8dp" />
-            <TextView
-                android:id="@+id/tvDetalleNombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp" />
-        </TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Categoría:"
-                android:textStyle="bold"
-                android:padding="8dp" />
-            <TextView
-                android:id="@+id/tvDetalleCategoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp" />
-        </TableRow>
+            <ImageView
+                android:id="@+id/ivIconoDetalle"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Detalle de tarea"
+                android:src="@android:drawable/ic_menu_info_details" />
 
-        <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Card 1: Información General -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prioridad:"
-                android:textStyle="bold"
-                android:padding="8dp" />
-            <TextView
-                android:id="@+id/tvDetallePrioridad"
-                android:layout_width="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Información General"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TableLayout
+                        android:id="@+id/tlDetalle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="1">
+
+                        <TableRow>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="Nombre:"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvDetalleNombre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="Categoría:"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvDetalleCategoria"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="Prioridad:"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvDetallePrioridad"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="Estado:"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvDetalleEstado"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card 2: Avance e Importancia -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp" />
-        </TableRow>
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
 
-        <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Avance e Importancia"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:layout_marginBottom="8dp"/>
+
+                    <RatingBar
+                        android:id="@+id/rbDetalleImportancia"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:stepSize="1.0" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cumplimiento:"
+                        android:layout_marginTop="8dp" />
+
+                    <ProgressBar
+                        android:id="@+id/pbAvance"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:max="100" />
+
+                    <CheckBox
+                        android:id="@+id/cbDetalleCompletada"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Marcar como lista"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card 3: Checklist de Subtareas -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Estado:"
-                android:textStyle="bold"
-                android:padding="8dp" />
-            <TextView
-                android:id="@+id/tvDetalleEstado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp" />
-        </TableRow>
-    </TableLayout>
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Avance de la tarea"
-        android:layout_marginTop="24dp"
-        android:gravity="center" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-    <ProgressBar
-        android:id="@+id/pbAvance"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:max="100" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Checklist de Subtareas"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:layout_marginBottom="8dp" />
 
-    <CheckBox
-        android:id="@+id/cbDetalleCompletada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Marcar como lista"
-        android:layout_marginTop="16dp" />
+                    <LinearLayout
+                        android:id="@+id/llSubtareasChecklist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones de Acción -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="32dp"
+        android:padding="8dp"
         android:gravity="center">
 
         <Button
@@ -126,7 +220,8 @@
             android:id="@+id/btnEliminar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eliminar" />
+            android:text="Eliminar"
+            android:backgroundTint="@android:color/holo_red_light" />
     </LinearLayout>
 
 </LinearLayout>
