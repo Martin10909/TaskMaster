@@ -21,6 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GestionTareasActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".CrearTareaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerTareaActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
